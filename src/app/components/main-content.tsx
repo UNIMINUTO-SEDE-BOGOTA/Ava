@@ -6,6 +6,10 @@ import verAva2 from "@/img/Ver_AVA2.png";
 import avaIcon from "@/img/ICON AVA.png";
 import avapVideo from "/avap.mp4";
 
+// NOTA: Se ha eliminado cualquier burbuja de chat flotante que pudiera existir en otros componentes.
+// Si hubiera algún elemento visual de chat emergente, debe ser removido para mantener coherencia con
+// la nueva redirección al enlace externo.
+
 export function MainContent({ onStartChat, onViewDemo }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [activeModal, setActiveModal] = useState<string | null>(null);
@@ -29,7 +33,7 @@ export function MainContent({ onStartChat, onViewDemo }) {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % avaImages.length);
-    }, 1000); // Cambia cada 3 segundos
+    }, 3000); // Cambia cada 3 segundos
     return () => clearInterval(interval);
   }, [avaImages.length]);
 
@@ -98,14 +102,15 @@ export function MainContent({ onStartChat, onViewDemo }) {
   };
 
   // Función para redirigir a correo
-const openEmail = () => {
-  const destinatario = encodeURIComponent('calidadyriesgosbgta@uniminuto.edu');
-  const asunto = encodeURIComponent('Consulta sobre AVA');
-  window.open(
-    `https://outlook.office.com/mail/deeplink/compose?to=${destinatario}&subject=${asunto}`,
-    '_blank'
-  );
-};
+  const openEmail = () => {
+    const destinatario = encodeURIComponent('calidadyriesgosbgta@uniminuto.edu');
+    const asunto = encodeURIComponent('Consulta sobre AVA');
+    window.open(
+      `https://outlook.office.com/mail/deeplink/compose?to=${destinatario}&subject=${asunto}`,
+      '_blank'
+    );
+  };
+
   // Función para centrar en la sección del video
   const scrollToVideo = () => {
     if (videoSectionRef.current) {
@@ -116,13 +121,9 @@ const openEmail = () => {
     }
   };
 
-  // Función para iniciar el chat
+  // Función para iniciar el chat - AHORA REDIRIGE AL ENLACE EXTERNO
   const handleStartChat = () => {
-    if (onStartChat) {
-      onStartChat();
-    } else {
-      console.log("Iniciando chat con AVA...");
-    }
+    window.open('https://orange-stone-0f7eba510.3.azurestaticapps.net', '_blank');
   };
 
   // Función para ver la demo
@@ -363,6 +364,7 @@ Está diseñada para apoyarte en consultas técnicas, interpretación de requisi
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex justify-center"
+              ref={videoSectionRef}
             >
               {/* CONTENEDOR RECTANGULAR (16:9) */}
               <div className="relative w-full max-w-2xl h-[22rem] rounded-3xl overflow-hidden shadow-2xl bg-black">

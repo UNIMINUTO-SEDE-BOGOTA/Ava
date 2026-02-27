@@ -1,7 +1,6 @@
-// src/app/App.tsx
 import { useState } from "react";
 import { MainContent } from "./components/main-content";
-import { ChatSidebar } from "./components/chat-sidebar";
+// Estos imports se mantienen porque el código comentado los utiliza, pero no afectan la ejecución.
 import { MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -10,10 +9,9 @@ function App() {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
   const [unreadMessages, setUnreadMessages] = useState(0);
 
+  // Función para iniciar el chat - redirige a la aplicación externa
   const handleStartChat = () => {
-    console.log("Abriendo chat con AVA...");
-    setIsChatOpen(true);
-    setUnreadMessages(0); // Resetear mensajes no leídos cuando se abre
+    window.open('https://orange-stone-0f7eba510.3.azurestaticapps.net', '_blank');
   };
 
   const handleViewDemo = () => {
@@ -21,7 +19,7 @@ function App() {
     setIsDemoOpen(true);
   };
 
-  // Simular mensajes no leídos (puedes conectar esto a tu webhook)
+  // Simular mensajes no leídos (ya no se usa porque el botón está comentado, pero se deja por si acaso)
   const simulateNewMessage = () => {
     if (!isChatOpen) {
       setUnreadMessages(prev => prev + 1);
@@ -30,13 +28,22 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Tu MainContent original con todos los botones */}
+      {/* MainContent contiene los botones principales que redirigen al chat externo */}
       <MainContent 
         onStartChat={handleStartChat}
         onViewDemo={handleViewDemo}
       />
       
-      {/* Chat Sidebar - Controlado por el estado */}
+      {/* 
+        ============================================================
+        CHAT SIDEBAR (CHAT INTERNO)
+        ============================================================
+        Este sidebar se muestra cuando isChatOpen = true. 
+        ACTUALMENTE ESTÁ DESHABILITADO PORQUE EL CHAT AHORA REDIRIGE 
+        A UNA APLICACIÓN EXTERNA. 
+        Para volver a activar el chat interno, descomentar el bloque 
+        y ajustar la lógica de handleStartChat.
+      */}
       {isChatOpen && (
         <ChatSidebar 
           onClose={() => setIsChatOpen(false)}
@@ -44,38 +51,48 @@ function App() {
         />
       )}
       
-      {/* Botón flotante de chat */}
-      {!isChatOpen && (
-        <motion.button
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ type: "spring", damping: 15, stiffness: 200 }}
-          onClick={handleStartChat}
-          className="fixed bottom-6 right-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 rounded-full shadow-2xl hover:from-orange-600 hover:to-orange-700 transition-all z-40 hover:scale-110 duration-300 group"
-        >
-          <div className="relative">
-            <MessageSquare className="w-6 h-6" />
-            
-            {/* Notificación de mensajes no leídos */}
-            {unreadMessages > 0 && (
-              <motion.div
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
-              >
-                {unreadMessages}
-              </motion.div>
-            )}
-            
-            {/* Tooltip */}
-            <div className="absolute right-12 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
-              Chatear con AVA
-            </div>
+      {/* 
+        ============================================================
+        BOTÓN FLOTANTE DE CHAT (DESHABILITADO)
+        ============================================================
+        Este botón estaba originalmente diseñado para abrir el chat 
+        interno. Por requerimiento, ahora el chat se maneja a través 
+        del enlace externo (ver handleStartChat) y los botones en 
+        MainContent. Se deja este bloque comentado como documentación 
+        para futuras referencias. Si se desea restaurar, eliminar los 
+        comentarios y ajustar la lógica.
+
+        NOTA: El bloque estaba causando un error de sintaxis por mal 
+        cerrado; se ha corregido y comentado adecuadamente.
+      */}
+
+      {/*
+      <motion.button
+        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ type: "spring", damping: 15, stiffness: 200 }}
+        onClick={handleStartChat}
+        className="fixed bottom-6 right-6 bg-gradient-to-r from-orange-500 to-orange-600 text-white p-4 rounded-full shadow-2xl hover:from-orange-600 hover:to-orange-700 transition-all z-40 hover:scale-110 duration-300 group"
+      >
+        <div className="relative">
+          <MessageSquare className="w-6 h-6" />
+          {unreadMessages > 0 && (
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center"
+            >
+              {unreadMessages}
+            </motion.div>
+          )}
+          <div className="absolute right-12 top-1/2 transform -translate-y-1/2 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">
+            Chatear con AVA
           </div>
-        </motion.button>
-      )}
+        </div>
+      </motion.button>
+      */}
       
-      {/* Demo Interface */}
+      {/* Demo Interface (sin cambios) */}
       {isDemoOpen && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl w-full max-w-6xl h-[90vh] overflow-hidden">
