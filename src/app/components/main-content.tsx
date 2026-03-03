@@ -271,26 +271,24 @@ Está diseñada para apoyarte en consultas técnicas, interpretación de requisi
               
               {/* Botones principales CON CARRUSEL DE IMÁGENES - VERSIÓN MINIMALISTA */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
-                <div className="flex items-center gap-4">
-                  <button 
-                    onClick={handleStartChat}
-                    className="px-8 py-4 bg-white text-[#012657] font-semibold rounded-xl hover:bg-yellow-100 transition-all flex items-center gap-2 shadow-lg hover:scale-105 active:scale-95 cursor-pointer"
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-6">
+                  <button onClick={handleStartChat}
+                    className="w-full sm:w-auto px-8 py-4 bg-white text-[#012657] font-semibold rounded-xl hover:bg-yellow-100 transition-all flex items-center justify-center gap-2 shadow-lg hover:scale-105 active:scale-95 cursor-pointer"
                   >
                     <img src={avaIcon} alt="AVA" className="w-9 h-9" />
                     Iniciar Chat
                   </button>
                   
-                  {/* Contenedor del botón Ver Demo con carrusel MINIMALISTA */}
-                  <div className="relative flex items-center gap-3">
+                  <div className="relative flex items-center gap-3 w-full sm:w-auto">
                     <button 
                       onClick={handleViewDemo}
-                      className="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-xl hover:bg-white/30 transition-all border border-white/40 hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap"
+                      className="w-full sm:w-auto px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-xl hover:bg-white/30 transition-all border border-white/40 hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap"
                     >
                       Ver Demo
                     </button>
-                    
-                    {/* Carrusel transparente minimalista - SOLO PUNTOS */}
-                    <div className="relative w-24 h-24">
+
+                    {/* Carrusel - oculto en móvil para no interferir */}
+                    <div className="relative w-24 h-24 hidden sm:block">
                       {avaImages.map((img, index) => (
                         <motion.img
                           key={index}
@@ -298,23 +296,17 @@ Está diseñada para apoyarte en consultas técnicas, interpretación de requisi
                           alt={`AVA ${index + 1}`}
                           className="absolute inset-0 w-full h-full object-cover rounded-lg"
                           initial={{ opacity: 0 }}
-                          animate={{ 
-                            opacity: index === currentImageIndex ? 1 : 0,
-                          }}
+                          animate={{ opacity: index === currentImageIndex ? 1 : 0 }}
                           transition={{ duration: 0.5 }}
                         />
                       ))}
-                      
-                      {/* Solo puntos indicadores - fondo transparente */}
                       <div className="absolute bottom-2 inset-x-0 flex justify-center items-center gap-1">
                         {avaImages.map((_, index) => (
                           <button
                             key={index}
                             onClick={() => setCurrentImageIndex(index)}
                             className={`w-1.5 h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                              index === currentImageIndex 
-                                ? 'bg-white' 
-                                : 'bg-white/30 hover:bg-white/50'
+                              index === currentImageIndex ? 'bg-white' : 'bg-white/30 hover:bg-white/50'
                             }`}
                           />
                         ))}
