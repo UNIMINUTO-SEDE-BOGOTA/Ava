@@ -121,9 +121,9 @@ export function MainContent({ onStartChat, onViewDemo }) {
     }
   };
 
-  // Función para iniciar el chat - AHORA REDIRIGE AL ENLACE EXTERNO
+  // Función para iniciar el chat
   const handleStartChat = () => {
-    window.open('https://orange-stone-0f7eba510.3.azurestaticapps.net', '_blank');
+    window.open('https://chat-ava-u.vercel.app', '_blank');
   };
 
   // Función para ver la demo
