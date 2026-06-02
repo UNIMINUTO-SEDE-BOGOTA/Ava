@@ -513,7 +513,7 @@ Escribe "HOLA" para comenzar.`
                   title="PB CalidadyRiesgos"
                   width="100%" 
                   height="100%" 
-                  src="https://app.powerbi.com/view?r=eyJrIjoiNWQ4ODhlYmQtMGUxMC00ZjU0LTgzMzEtMTIxNTZiZWM0N2EwIiwidCI6ImIxYmE4NWViLWEyNTMtNDQ2Ny05ZWU4LWQ0ZjhlZDRkZjMwMCIsImMiOjR9"
+                  src="https://app.powerbi.com/view?r=eyJrIjoiYWQwZGMzNWQtODI0Mi00OTRjLThlMjctNjUwZWY0ZTcwMDhlIiwidCI6ImIxYmE4NWViLWEyNTMtNDQ2Ny05ZWU4LWQ0ZjhlZDRkZjMwMCIsImMiOjR9"
                   frameBorder="0"
                   allowFullScreen
                   className="rounded-xl"
